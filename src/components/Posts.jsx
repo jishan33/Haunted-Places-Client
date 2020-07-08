@@ -1,37 +1,36 @@
-import React, { Component } from 'react';
-import Home from './Home';
+import React, { Component } from "react";
+
 
 class Posts extends Component {
-  state = { posts: null }
- 
- async componentDidMount() {
-   this.getPosts();
- }
+  state = { posts: [] };
 
- getPosts= async () => {
-   const response = await fetch("http://localhost:3000/posts");
-   const posts = await response.json();
-   
-   this.setState({posts});
- }
+  deletePost = async (id) => {
+    await fetch(`http://localhost:300/countries/${id}`, {
+      method: "DELETE",
+    });
+    this.props.onDeletePost(id);
+  };
 
- renderPosts = () => {
-   return this.state.posts.map((post, index) =>{return (
-     <div key={index} >
-       <h3>{post.country}</h3>
-     </div>
-    ) });
- }
+  renderPosts = () => {
+    return this.state.posts.map((post, index) => {
+      return (
+        <div key={index}>
+          <h3>{post.country}</h3>
 
-  render() { 
+          <span onClick={() => this.deletePost(post.id)}>Delete</span>
+        </div>
+      );
+    });
+  };
+
+  render() {
     const { posts } = this.state;
-    return ( 
+    return (
       <>
-      <h3>{posts && this.renderPosts()}</h3>
-      
+        <h3>{posts && this.renderPosts()}</h3>
       </>
-     );
+    );
   }
 }
- 
+
 export default Posts;
