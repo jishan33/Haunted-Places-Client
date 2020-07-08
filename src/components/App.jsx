@@ -1,10 +1,10 @@
-import React from "react";
+import React, {Component} from "react";
 import { Switch, Route } from "react-router-dom";
 import NoFound from "./NotFound";
 import Home from "./Home";
 import Posts from "./Posts";
-import CreatePost from "./CreatePost";
-import EditPost from "./EditPost";
+// import CreatePost from "./CreatePost";
+// import EditPost from "./EditPost";
 // import ProtectedRoute from "./PortectedRoute";
 import Navbar from "../shared/Navbar";
 // import { PostsContext, dispatch } from '../context/posts-context'
@@ -22,7 +22,7 @@ class App extends Component {
    this.setState({posts});
  };
 
- handleDeletePost = () => {
+ handleDeletePost = (id) => {
    this.setState({
      posts: this.state.posts.filter((p) => p.id !== id)
    });
@@ -38,14 +38,17 @@ class App extends Component {
     return ( 
       <React.Fragment>
       <Navbar />
+
       <Switch>
         <Route exact path="/posts" 
-        render ={(props) => {
+        render ={(props) => (
          < Posts {...props}
          posts={this.state.posts}
          onDeletePost={this.handleDeletePost} />
-        }}
-         />
+        )}
+        />
+
+
         {/* <Route exact path="/posts/create" component={CreatePost} /> */}
         {/* <Route exact path="posts/:id/edit" component={EditPost} /> */}
         <Route exact path="/" component={Home} />
@@ -53,7 +56,7 @@ class App extends Component {
       </Switch>
     </React.Fragment>
   );
-     );
+   
   }
 }
  
