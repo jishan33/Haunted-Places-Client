@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import countries from './countries.json'
 
 class CreatePost extends Component {
+  
   onInputChange = (event) => {
-    this.setState({
-      [event.target.id]: event.target.value,
-    });
+    let data
+    if(event.target.id==="country"){
+      const index = countries.findIndex((p) => p.country === event.target.value)
+      const continent = countries[index].continent;
+      data = {[event.target.id]: event.target.value, continent: continent}
+    } else { data = {[event.target.id]: event.target.value,} }
+    this.setState(data);
   };
 
   onFormSubmit = async (event) => {
@@ -28,14 +33,12 @@ class CreatePost extends Component {
   };
 
   render() {
+      console.log(this.state)
     return (
-      
       <div className="container">
         <h1>Add a new post</h1>
-       
         <form onSubmit={this.onFormSubmit}>
           <div className="form-row">
-
             <div className="form-group col-md-6">
               <label htmlFor="">Country</label>
               <select id="country" onChange={this.onInputChange}>
