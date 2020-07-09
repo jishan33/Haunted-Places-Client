@@ -86,6 +86,7 @@ class CreatePost extends Component {
 
             <div className="form-group col-md-6">
               <label htmlFor="">Image url</label>
+              
               <input
                 type="text"
                 name="image"

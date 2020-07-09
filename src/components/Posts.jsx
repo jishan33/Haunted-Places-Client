@@ -18,9 +18,13 @@ class Posts extends Component {
   renderPosts = () => {
     return this.props.posts.map((post, index) => {
       return (
+
         <div key={index} className="card bg-dark text-white">
-           <img className="card-img" src={post.image} alt={post.location} />
+          
+          <img src={post.image} onError={(e)=>{e.target.onerror = null; e.target.src="https://afbic.com/wp-content/uploads/2019/09/arfb-haunted-places-blog.jpg"}}/>
+           
            <div className="card-img-overlay">
+       
           <Link
             to={{
               pathname: `/posts/${post.id}`,
