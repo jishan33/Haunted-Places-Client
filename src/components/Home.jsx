@@ -6,23 +6,20 @@ const Home = (props) => {
   const post = posts[index];
 
   return (
-     <React.Fragment>
-    
-      {post && (
-        <React.Fragment>
-          <img class="w-full" src={post.image} alt={post.location}></img>
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">{post.location}</div>
-            <p class="text-gray-700 text-base">
-              {post.description}
-            </p>
-
-            
-          </div>
-        </React.Fragment>
-      )}
-     </React.Fragment>
-    
+    <React.Fragment>
+      <div className="card bg-dark text-white">
+        {post && (
+          <React.Fragment>
+            <img className="card-img" src={post.image} alt={post.location} />
+            <div className="px-6 py-4">
+              <div className="font-bold text-xl mb-2"><h1 className="ml-5" >{post.location}</h1></div>
+              <div className="card-img-overlay"></div>
+              <h3 className="ml-5">{post.description}</h3>
+            </div>
+          </React.Fragment>
+        )}
+      </div>
+    </React.Fragment>
   );
 };
 

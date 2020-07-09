@@ -14,3 +14,9 @@ nav a:hover {
   background-color: rgba(160, 39, 2, 0.404);
   
 }
+
+.card-img-overlay{
+  
+  font-family: 'Fondamento', cursive;
+  color: red;
+}
