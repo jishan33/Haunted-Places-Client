@@ -1,23 +1,58 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const history = useHistory();
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/posts">Posts</Link>
-      <Link to="/posts/create">Add Post </Link>
-      <Link to="/login">Login</Link>
-      <Link to="/sign-up">Sign Up</Link>
-      <span
-        onClick={() => {
-          localStorage.removeItem("token");
-          history.push("/login");
-        }}
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <Link to="/" className="navbar-brand">
+        <img src={require("../assets/ghost-icon.png")} alt="icon" />
+      </Link>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        Logout
-      </span>
+        <span className="navbar-toggler-icon"></span>
+      </button>
+
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav">
+          <NavLink className="nav-item nav-link active" to="/">
+            Home
+          </NavLink>
+
+          <NavLink className="nav-item nav-link" to="/posts">
+            Posts
+          </NavLink>
+
+          <NavLink className="nav-item nav-link" to="/posts/create">
+            Add Post{" "}
+          </NavLink>
+
+          <NavLink className="nav-item nav-link" to="/login">
+            Login
+          </NavLink>
+
+          <NavLink className="nav-item nav-link" to="/sign-up">
+            Sign Up
+          </NavLink>
+
+          <p
+            className="nav-item nav-link"
+            onClick={() => {
+              localStorage.removeItem("token");
+              history.push("/login");
+            }}
+          >
+            Logout
+          </p>
+        </ul>
+      </div>
     </nav>
   );
 };

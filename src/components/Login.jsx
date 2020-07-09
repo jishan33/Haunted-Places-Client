@@ -43,26 +43,36 @@ class Login extends React.Component {
     const { email, password, errMessage } = this.state;
     return (
       <div className="container">
-        <h1>Login</h1>
+        <h1 className="mt-5">Login</h1>
         {errMessage && <span>{errMessage}</span>}
         <form onSubmit={this.onFormSubmit}>
+           <div className="form-group  mt-5">
           <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
-            id="email"
             value={email}
             onChange={this.onInputChange}
-          />
+            className="form-control" 
+            id="email" 
+            aria-describedby="emailHelp" 
+            
+          /><small id="emailHelp" className="form-text text-muted">Your email probably will not be shared with anyone else....</small>
+          </div>
+
+          <div className="form-group  mt-3">
           <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
-            id="password"
             value={password}
             onChange={this.onInputChange}
+            className="form-control" 
+            id="password" 
+            
           />
-          <input type="submit" value="Submit" />
+          </div>
+          <button type="submit" className="btn btn-secondary">Join us</button>
         </form>
       </div>
     );

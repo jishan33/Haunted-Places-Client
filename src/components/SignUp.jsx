@@ -19,7 +19,7 @@ class SignUp extends React.Component {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ user: { email, password }}),
+        body: JSON.stringify({ user: { email, password } }),
       });
       if (response.status >= 400) {
         throw new Error("incorrect credentials");
@@ -29,40 +29,60 @@ class SignUp extends React.Component {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ auth: { email, password }}),
-        })
-        const { jwt } = await response.json()
+          body: JSON.stringify({ auth: { email, password } }),
+        });
+        const { jwt } = await response.json();
         localStorage.setItem("token", jwt);
         this.props.history.push("/posts/create");
       }
     } catch (err) {
-      console.log(err.message)
+      console.log(err.message);
     }
   };
 
-   render() {
+  render() {
     const { email, password } = this.state;
     return (
       <div className="container">
-        <h1>Sign Up</h1>
+        <h1 className="mt-5">Sign Up</h1>
+
         <form onSubmit={this.onFormSubmit}>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email" className="mt-5">Email</label>
           <input
+            onChange={this.onInputChange}
             type="email"
             name="email"
-            id="email"
             value={email}
-            onChange={this.onInputChange}
+            className="form-control"
+            id="email"
+            aria-describedby="emailHelp"
           />
-          <label htmlFor="password">Password</label>
+          <small id="emailHelp" className="form-text text-muted">
+            We'll might share your email with someone else.
+          </small>
+
+          <label htmlFor="password" className="mt-3">Password</label>
           <input
             type="password"
             name="password"
-            id="password"
             value={password}
             onChange={this.onInputChange}
+            className="form-control"
+            id="password"
           />
-          <input type="submit" value="Submit" />
+          <div className="form-check mt-3">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              id="exampleCheck1"
+            />
+            <label className="form-check-label" htmlFor="exampleCheck1">
+              agreed to the rules.
+            </label>
+          </div>
+          <button type="submit" className="btn btn-secondary mt-3">
+            Submit
+          </button>
         </form>
       </div>
     );

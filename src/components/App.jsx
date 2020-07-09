@@ -11,6 +11,7 @@ import Navbar from "../shared/Navbar";
 import Login from './Login'
 import SignUp from './SignUp'
 import CountryMap from "../shared/CountryMap";
+import '../assets/App.css';
 
 class App extends Component {
   state = { posts: [] };
@@ -97,6 +98,8 @@ class App extends Component {
           <Route component={NoFound} />
           
         </Switch>
+
+        
       </React.Fragment>
     );
   }
