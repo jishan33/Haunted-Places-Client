@@ -34,14 +34,12 @@ class App extends Component {
     const posts = this.state.posts;
     posts[index] = {...editedPost, id: parseInt(id)};
     this.setState({ posts });
-    console.log(posts);
   };
 
   handleNewPost = (post) => {
     this.setState({
       posts: [...this.state.posts, post]
     });
-    console.log(post);
   };
 
   async componentDidMount() {

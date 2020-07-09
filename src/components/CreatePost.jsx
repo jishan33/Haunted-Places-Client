@@ -33,15 +33,16 @@ class CreatePost extends Component {
   };
 
   render() {
-      console.log(this.state)
+  
     return (
       <div className="container">
         <h1>Add a new post</h1>
         <form onSubmit={this.onFormSubmit}>
           <div className="form-row">
+
             <div className="form-group col-md-6">
               <label htmlFor="">Country</label>
-              <select id="country" onChange={this.onInputChange}>
+              <select className="form-control" id="country" onChange={this.onInputChange}>
                 {countries.map((obj, index) => (
                   <option key={index} value={obj.country}>
                     {obj.country}
@@ -116,11 +117,11 @@ class CreatePost extends Component {
                   agreed to the rules.
                 </label>
               </div>
-            </div>
 
             <button type="submit" className="btn btn-primary mt-3 ml-1">
               Submit
             </button>
+            </div>
           </div>
         </form>
       </div>
