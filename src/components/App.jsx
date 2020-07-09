@@ -11,6 +11,7 @@ import Navbar from "../shared/Navbar";
 import Login from './Login'
 import SignUp from './SignUp'
 import CountryMap from "../shared/CountryMap";
+import '../assets/App.css';
 
 class App extends Component {
   state = { posts: [] };

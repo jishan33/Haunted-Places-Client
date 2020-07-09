@@ -22,29 +22,26 @@ const Navbar = () => {
 
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
-          <li className="nav-item active">
-            <NavLink className="nav-item nav-link active" to="/">
-              Home
-            </NavLink>
-          </li>
+          <NavLink className="nav-item nav-link active" to="/">
+            Home
+          </NavLink>
+
           <NavLink className="nav-item nav-link" to="/posts">
             Posts
           </NavLink>
-          <li className="nav-item">
-            <NavLink className="nav-item nav-link" to="/posts/create">
-              Add Post{" "}
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-item nav-link" to="/login">
-              Login
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-item nav-link" to="/sign-up">
-              Sign Up
-            </NavLink>
-          </li>
+
+          <NavLink className="nav-item nav-link" to="/posts/create">
+            Add Post{" "}
+          </NavLink>
+
+          <NavLink className="nav-item nav-link" to="/login">
+            Login
+          </NavLink>
+
+          <NavLink className="nav-item nav-link" to="/sign-up">
+            Sign Up
+          </NavLink>
+
           <p
             className="nav-item nav-link"
             onClick={() => {

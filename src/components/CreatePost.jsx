@@ -28,11 +28,13 @@ class CreatePost extends Component {
 
   render() {
     return (
+      
       <div className="container">
         <h1>Add a new post</h1>
-
+       
         <form onSubmit={this.onFormSubmit}>
           <div className="form-row">
+
             <div className="form-group col-md-6">
               <label htmlFor="">Country</label>
               <input
@@ -43,6 +45,7 @@ class CreatePost extends Component {
                 className="form-control"
               />
             </div>
+
             <div className="form-group col-md-6">
               <label htmlFor="">Location</label>
               <input
@@ -53,6 +56,7 @@ class CreatePost extends Component {
                 className="form-control"
               />
             </div>
+
             <div className="form-group col-md-6">
               <label htmlFor="">Time</label>
               <input
@@ -74,6 +78,7 @@ class CreatePost extends Component {
                 className="form-control"
               />
             </div>
+
             <div className="form-group col-md-6">
               <label htmlFor="">Image url</label>
               <input
@@ -90,12 +95,13 @@ class CreatePost extends Component {
               <textarea
                 name="description"
                 onChange={this.onInputChange}
-                className="form-control" id="exampleFormControlTextarea1" 
+                className="form-control"
+                id="exampleFormControlTextarea1"
                 rows="3"
               ></textarea>
             </div>
 
-            <div className="form-group">
+            <div className="form-group col-md-6">
               <div className="form-check  ml-1">
                 <input
                   className="form-check-input"
@@ -104,16 +110,17 @@ class CreatePost extends Component {
                 />
                 <label className="form-check-label" htmlFor="gridCheck">
                   agreed to the rules.
-                </label></div>
+                </label>
+              </div>
+            </div>
+
             <button type="submit" className="btn btn-primary mt-3 ml-1">
               Submit
             </button>
-              
-            </div>
-            
           </div>
         </form>
       </div>
+        
     );
   }
 }

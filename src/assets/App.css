@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Fondamento&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+
+div .container {
+  font-family: 'Fondamento', cursive;
+}
+
+nav {
+  font-family: 'Work Sans', sans-serif;
+  text-align: center;
+}
+
+nav a:hover {
+  background-color: rgba(160, 39, 2, 0.404);
+  
+}
