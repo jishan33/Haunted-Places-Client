@@ -33,9 +33,6 @@ class Posts extends Component {
             </div>
           </Link>
 
-          <p>{post.description}</p>
-
-          
             <button type="button" className="btn btn-dark">
             <Link to={`posts/${post.id}/edit`}>Edit</Link></button>
            <button type="button" className="btn btn-dark ml-2">
