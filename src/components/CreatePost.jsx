@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import countries from './countries.json'
 
 class CreatePost extends Component {
   onInputChange = (event) => {
@@ -37,13 +38,13 @@ class CreatePost extends Component {
 
             <div className="form-group col-md-6">
               <label htmlFor="">Country</label>
-              <input
-                type="text"
-                name="country"
-                id="country"
-                onChange={this.onInputChange}
-                className="form-control"
-              />
+              <select id="country" onChange={this.onInputChange}>
+                {countries.map((obj, index) => (
+                  <option key={index} value={obj.country}>
+                    {obj.country}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="form-group col-md-6">
