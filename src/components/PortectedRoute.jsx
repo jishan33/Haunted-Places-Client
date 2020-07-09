@@ -35,7 +35,7 @@ class ProtectedRoute extends Component {
   render() {
     const { loading, auth } = this.state;
     console.log(loading)
-    console.log(auth)
+    console.log(this.props)
     console.log(this.props.component)
     if (!loading && !auth) {
       return <Redirect to="/" />;
@@ -46,7 +46,7 @@ class ProtectedRoute extends Component {
           <Route
             exact={this.props.exact}
             path={this.props.path}
-            component={this.props.component}
+            render={this.props.render}
           />
         )
       );
