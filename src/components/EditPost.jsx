@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import countries from './countries.json'
 
 class EditPost extends Component {
   state = {
@@ -20,16 +21,20 @@ class EditPost extends Component {
   }
 
   onInputChange = (event) => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
+    let data
+    if(event.target.id==="country"){
+      const index = countries.findIndex((p) => p.country === event.target.value)
+      const continent = countries[index].continent;
+      data = {[event.target.id]: event.target.value, continent: continent}
+    } else { data = {[event.target.id]: event.target.value,} }
+    this.setState(data);
   };
 
   onFormSubmit = async (event) => {
       event.preventDefault();
-      const { id, country, location, time, haunted_level, description, image } = this.state;
-
-      const editedPost = { country, location, time, haunted_level, description, image};
+      const { id, continent, country, location, time, haunted_level, description, image } = this.state;
+      console.log(continent)
+      const editedPost = { continent, country, location, time, haunted_level, description, image};
 
       await fetch(`http://localhost:3000/posts/${id}`, {
         method: "PUT",
@@ -45,10 +50,20 @@ class EditPost extends Component {
 
   render() {
     const {country, location,  haunted_level, description, loading} = this.state;
+    console.log(this.state)
     return (
       !loading && (
       <div className="container">
         <form onSubmit={this.onFormSubmit}>
+          <label htmlFor="country">Country</label>
+            <select id="country" value={country} onChange={this.onInputChange}>
+              {countries.map((obj, index) => (
+                <option key={index} value={obj.country}>
+                  {obj.country}
+                </option>
+              ))}
+            </select>
+
           <label htmlFor="location">Location</label>
           <input
             type="text"
@@ -56,15 +71,6 @@ class EditPost extends Component {
             id="location"
             onChange={this.onInputChange}
             value={location}
-          />
-
-          <label htmlFor="country">Country</label>
-          <input
-            type="text"
-            name="country"
-            id="country"
-            onChange={this.onInputChange}
-            value={country}
           />
 
           <label htmlFor="haunted_level">Haunted level</label>
