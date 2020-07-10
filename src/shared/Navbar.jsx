@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import { Link, NavLink, Redirect } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
 import { PostsContext } from "../context/PostsContext";
 
 class Navbar extends Component {
   static contextType = PostsContext;
 
-    reDirect = () => {
-      console.log("here")
-
-    }
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -43,15 +40,16 @@ class Navbar extends Component {
                   Add Post{" "}
                 </NavLink>
 
-                <span
-                  className="nav-item nav-link"
-                  onClick={() => {
-                    localStorage.removeItem("token");
-                    this.reDirect();
-                  }}
-                >
-                  Logout
-                </span>
+                <Link to="/login">
+                  <span
+                    className="nav-item nav-link"
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                    }}
+                  >
+                    Logout
+                  </span>
+                </Link>
               </React.Fragment>
             ) : (
               <React.Fragment>
