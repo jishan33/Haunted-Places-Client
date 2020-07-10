@@ -12,8 +12,6 @@ class ProtectedRoute extends Component {
   getPosts = async () => {
     const response = await fetch("http://localhost:3000/posts");
     const posts = await response.json();
-
-    // console.log(this.state)
      this.context.dispatch("populate",{ posts });
   };
   
