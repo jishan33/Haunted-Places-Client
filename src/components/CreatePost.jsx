@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import countries from './countries.json'
+import { PostsContext } from "../context/PostsContext";
 
 class CreatePost extends Component {
+  static contextType = PostsContext;
   
   onInputChange = (event) => {
     let data
@@ -28,7 +30,7 @@ class CreatePost extends Component {
     });
 
     const newPost = await response.json();
-    this.props.onNewPost(newPost);
+    this.context.dispatch("add", newPost);;
     this.props.history.push("/posts");
   };
 

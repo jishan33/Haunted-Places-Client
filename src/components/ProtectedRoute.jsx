@@ -1,14 +1,27 @@
 import React, { Component } from "react";
 import { Route, Redirect } from "react-router-dom";
+import { PostsContext} from "../context/PostsContext";
 
 class ProtectedRoute extends Component {
+  static contextType = PostsContext;
   state = {
     auth: false,
     loading: true,
   };
 
+  getPosts = async () => {
+    const response = await fetch("http://localhost:3000/posts");
+    const posts = await response.json();
+
+    // console.log(this.state)
+     this.context.dispatch("populate",{ posts });
+  };
+  
+  
+
   async componentDidMount() {
    try {
+     this.getPosts();
      const response = await fetch("http://localhost:3000/status", {
        headers: {
          'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -43,7 +56,7 @@ class ProtectedRoute extends Component {
           <Route
             exact={this.props.exact}
             path={this.props.path}
-            render={this.props.render}
+            component={this.props.component}
           />
         )
       );

@@ -6,41 +6,43 @@ import Posts from "./Posts";
 import CreatePost from "./CreatePost";
 import EditPost from "./EditPost";
 import ShowPost from "./ShowPost";
-import ProtectedRoute from "./PortectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
 import Navbar from "../shared/Navbar";
-import Login from './Login'
-import SignUp from './SignUp'
-import CountryMap from "../shared/CountryMap";
-import '../assets/App.css';
+import Login from "./Login";
+import SignUp from "./SignUp";
+import { PostsContext, dispatch } from "../context/PostsContext";
+import "../assets/App.css";
 
 class App extends Component {
-  state = { posts: [] };
+  state = { posts: [], dispatch: dispatch.bind(this) };
 
   getPosts = async () => {
     const response = await fetch("http://localhost:3000/posts");
     const posts = await response.json();
 
-    this.setState({ posts });
+    // this.context.dispatch("populate", { posts });
+    // console.log(this.state)
+     this.setState({ posts });
   };
 
-  handleDeletePost = (id) => {
-    this.setState({
-      posts: this.state.posts.filter((p) => p.id !== id),
-    });
-  };
+  // handleDeletePost = (id) => {
+  //   this.setState({
+  //     posts: this.state.posts.filter((p) => p.id !== id),
+  //   });
+  // };
 
-  handleEditPost = (id, editedPost) => {
-    const index = this.state.posts.findIndex((p) => p.id === parseInt(id))
-    const posts = this.state.posts;
-    posts[index] = {...editedPost, id: parseInt(id)};
-    this.setState({ posts });
-  };
+  // handleEditPost = (id, editedPost) => {
+  //   const index = this.state.posts.findIndex((p) => p.id === parseInt(id));
+  //   const posts = this.state.posts;
+  //   posts[index] = { ...editedPost, id: parseInt(id) };
+  //   this.setState({ posts });
+  // };
 
-  handleNewPost = (post) => {
-    this.setState({
-      posts: [...this.state.posts, post]
-    });
-  };
+  // handleNewPost = (post) => {
+  //   this.setState({
+  //     posts: [...this.state.posts, post],
+  //   });
+  // };
 
   async componentDidMount() {
     this.getPosts();
@@ -48,57 +50,26 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <PostsContext.Provider value={this.state}>
         <Navbar />
-        <CountryMap />
-
         <Switch>
-          <Route
-            exact
-            path="/posts"
-            render={(props) => (
-              <Posts
-                {...props}
-                posts={this.state.posts}
-                onDeletePost={this.handleDeletePost}
-              />
-            )}
-          />
+          <Route exact path="/posts" component={Posts} />
 
-          <ProtectedRoute exact path="/posts/create" 
-            render={(props) => (
-              <CreatePost {...props} 
-              onNewPost={this.handleNewPost} />
-            )}
-          />
-            
-          <ProtectedRoute
-            exact
-            path="/posts/:id/edit"
-            render={(props) => (
-              <EditPost {...props} onEditedPost={this.handleEditPost} />
-            )}
-          />
+          <ProtectedRoute exact path="/posts/create" component={CreatePost} />
 
-          
+          <ProtectedRoute exact path="/posts/:id/edit" component={EditPost} />
+
           <Route exact path="/posts/:id" component={ShowPost} />
 
-          <Route exact path="/"
-            render={(props) => (
-              <Home {...props}
-              posts={this.state.posts} />
-            )} />
+          <Route exact path="/" component={Home} />
 
-          {/* <Route exact path="/login" component={Login} /> */}
           <Route exact path="/login" component={Login} />
+
           <Route exact path="/sign-up" component={SignUp} />
 
           <Route component={NoFound} />
-          
         </Switch>
-
-        
-      </React.Fragment>
+      </PostsContext.Provider>
     );
   }
 }
