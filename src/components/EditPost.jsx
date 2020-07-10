@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import countries from "./countries.json";
+import { PostsContext } from "../context/PostsContext";
 
 class EditPost extends Component {
+  static contextType = PostsContext;
   state = {
     country: "",
     location: "",
@@ -10,32 +12,8 @@ class EditPost extends Component {
     description: "",
     image: "",
     loading: true,
-    id: this.props.match.params.id,
+    id: Number(this.props.match.params.id)
   };
-
-  async componentDidMount() {
-    const { id } = this.state;
-    const response = await fetch(`http://localhost:3000/posts/${id}`);
-    const {
-      country,
-      location,
-      time,
-      haunted_level,
-      description,
-      image,
-    } = await response.json();
-    this.setState({
-      id,
-      country,
-      location,
-      time,
-      haunted_level,
-      description,
-      image,
-      loading: false,
-    });
-  }
-
   onInputChange = (event) => {
     let data;
     if (event.target.id === "country") {
@@ -62,7 +40,9 @@ class EditPost extends Component {
       description,
       image,
     } = this.state;
+
     const editedPost = {
+      id,
       continent,
       country,
       location,
@@ -72,6 +52,8 @@ class EditPost extends Component {
       image,
     };
 
+   await this.context.dispatch("update", editedPost);
+
     await fetch(`http://localhost:3000/posts/${id}`, {
       method: "PUT",
       headers: {
@@ -80,9 +62,19 @@ class EditPost extends Component {
       },
       body: JSON.stringify(editedPost),
     });
-    this.props.onEditedPost(id, editedPost);
     this.props.history.push("/posts");
   };
+
+  async componentDidMount() {
+    const posts = await this.context.posts
+     const foundPost = posts.find((post) => {
+      
+      return post.id === this.state.id;
+    });
+    this.setState({ ...foundPost, loading: false });
+  }
+
+
 
   render() {
     const {
@@ -92,6 +84,7 @@ class EditPost extends Component {
       description,
       loading,
     } = this.state;
+   
     return (
       !loading && (
         <div className="container">

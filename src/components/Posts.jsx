@@ -1,27 +1,28 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { PostsContext } from "../context/PostsContext";
+
 
 class Posts extends Component {
-  state = { posts: [] };
+  static contextType = PostsContext;
 
   deletePost = async (id) => {
+    this.context.dispatch("delete", id)
     await fetch(`http://localhost:3000/posts/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-    });
-
-    this.props.onDeletePost(id);
+    }); 
   };
 
-  renderPosts = () => {
-    return this.props.posts.map((post, index) => {
+  renderPosts = (posts) => {
+    let url = "https://afbic.com/wp-content/uploads/2019/09/arfb-haunted-places-blog.jpg";
+    return posts.map((post, index) => {
       return (
 
         <div key={index} className="card bg-dark text-white">
-          
-          <img src={post.image} onError={(e)=>{e.target.onerror = null; e.target.src="https://afbic.com/wp-content/uploads/2019/09/arfb-haunted-places-blog.jpg"}}/>
+          <img src={post.image? post.image : url} alt={post.location} onError={(e)=>{e.target.onerror = null; e.target.src=url}}/>
            
            <div className="card-img-overlay">
        
@@ -49,9 +50,10 @@ class Posts extends Component {
   };
 
   render() {
+    const {posts} = this.context;
     return (
       <>
-        <h3>{this.renderPosts()}</h3>
+        <h3>{this.renderPosts(posts)}</h3>
       </>
     );
   }
