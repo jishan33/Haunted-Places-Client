@@ -1,6 +1,8 @@
 import React from "react";
+import { PostsContext } from "../context/PostsContext";
 
 class Login extends React.Component {
+  static contextType = PostsContext;
   state = { email: "", password: "", errMessage: "" };
 
   onInputChange = (event) => {
@@ -30,7 +32,7 @@ class Login extends React.Component {
       } else {
         const { jwt } = await response.json();
         localStorage.setItem("token", jwt);
-        this.props.history.push("/");
+        this.props.history.push("/posts/create");
       }
     } catch (err) {
       this.setState({
