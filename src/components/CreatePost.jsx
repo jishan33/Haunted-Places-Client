@@ -30,7 +30,7 @@ class CreatePost extends Component {
     });
 
     const newPost = await response.json();
-    this.context.dispatch("add", newPost);;
+    this.context.dispatch("add", newPost);
     this.props.history.push("/posts");
   };
 

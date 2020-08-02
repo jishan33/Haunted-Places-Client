@@ -12,7 +12,7 @@ class EditPost extends Component {
     description: "",
     image: "",
     loading: true,
-    id: Number(this.props.match.params.id)
+    id: Number(this.props.match.params.id),
   };
   onInputChange = (event) => {
     let data;
@@ -52,7 +52,7 @@ class EditPost extends Component {
       image,
     };
 
-   await this.context.dispatch("update", editedPost);
+    await this.context.dispatch("update", editedPost);
 
     await fetch(`http://localhost:3000/posts/${id}`, {
       method: "PUT",
@@ -66,15 +66,12 @@ class EditPost extends Component {
   };
 
   async componentDidMount() {
-    const posts = await this.context.posts
-     const foundPost = posts.find((post) => {
-      
+    const posts = await this.context.posts;
+    const foundPost = posts.find((post) => {
       return post.id === this.state.id;
     });
     this.setState({ ...foundPost, loading: false });
   }
-
-
 
   render() {
     const {
@@ -84,7 +81,7 @@ class EditPost extends Component {
       description,
       loading,
     } = this.state;
-   
+
     return (
       !loading && (
         <div className="container">

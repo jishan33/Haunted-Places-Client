@@ -34,7 +34,7 @@ class Navbar extends Component {
               Posts
             </NavLink>
 
-            {this.context.currentUser || localStorage.getItem("auth") ? (
+            {this.context.currentUser ? (
               <React.Fragment>
                 <NavLink className="nav-item nav-link" to="/posts/create">
                   Add Post{" "}
